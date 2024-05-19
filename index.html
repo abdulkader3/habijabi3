@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Guessing Game</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  input[type="number"] {
+    width: 50px;
+  }
+</style>
+</head>
+<body>
+  <h1>Number Guessing Game</h1>
+  
+  <div id="playerNames">
+    <input type="text" id="player1Name" placeholder="Enter Player 1 Name">
+    <input type="text" id="player2Name" placeholder="Enter Player 2 Name">
+    <button onclick="startGame()">Start Game</button>
+  </div>
+  
+  <div id="game" style="display: none;">
+    <p id="playerTurn"></p>
+    <div id="player1Section" style="display: none;">
+      <h2>Player 1</h2>
+      <p>Enter your number:</p>
+      <input type="number" id="player1Number">
+      <button onclick="submitPlayer1Number()">Submit</button>
+    </div>
+    <div id="player2Section" style="display: none;">
+      <h2>Player 2</h2>
+      <p>Guess the number:</p>
+      <input type="number" id="player2Guess">
+      <button onclick="submitPlayer2Guess()">Guess</button>
+    </div>
+    <p id="result"></p>
+  </div>
+
+<script>
+  let player1, player2, player1Number, player2Guess, winningNumber;
+
+  function startGame() {
+    player1 = document.getElementById("player1Name").value;
+    player2 = document.getElementById("player2Name").value;
+    document.getElementById("playerNames").style.display = "none";
+    document.getElementById("game").style.display = "block";
+    document.getElementById("playerTurn").innerText = `${player2}'s turn`;
+    document.getElementById("player1Section").style.display = "block";
+  }
+
+  function submitPlayer1Number() {
+    player1Number = parseInt(document.getElementById("player1Number").value);
+    document.getElementById("player1Section").style.display = "none";
+    document.getElementById("playerTurn").innerText = `${player1}'s turn`;
+    document.getElementById("player2Section").style.display = "block";
+  }
+
+  function submitPlayer2Guess() {
+    player2Guess = parseInt(document.getElementById("player2Guess").value);
+    if (player2Guess === player1Number) {
+      document.getElementById("result").innerText = `${player2} wins!`;
+      document.getElementById("player2Section").style.display = "none";
+    } else {
+      document.getElementById("result").innerText = "Incorrect guess, try again!";
+    }
+    document.getElementById("playerTurn").innerText = `${player1}'s turn`;
+    document.getElementById("player1Section").style.display = "block";
+  }
+</script>
+</body>
+</html>
+
